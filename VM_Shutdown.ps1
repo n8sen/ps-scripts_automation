@@ -1,0 +1,21 @@
+﻿# Script shutdowns ALL running VMs in the current host
+# Nate Sendler
+# N8
+#
+# ███╗   ██╗███████╗
+# ████╗  ██║██╔══██║
+# ██╔██╗ ██║███████║  
+# ██║╚██╗██║██╔══██║
+# ██║ ╚████║███████║
+# ╚═╝  ╚═══╝╚══════╝
+
+
+
+$vms = Get-VM | Where-Object { $_.State -eq 'Running' }
+
+foreach ($vm in $vms) {
+    Write-Host "Stopping VM: $($vm.Name)"
+    Stop-VM -Name $vm.Name
+}
+
+Write-Host "Done."
